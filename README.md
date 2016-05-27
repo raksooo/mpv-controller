@@ -1,6 +1,8 @@
 # mpv-controller
 Node module which controls mpv media player written in ES6.
 
+npm: https://www.npmjs.com/package/mpv-controller
+
 ## Installation
 ```sh
 npm install mpv-controller
