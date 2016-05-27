@@ -1,4 +1,4 @@
-const mpv = require('./../mpv').mpv;
+const mpv = require('./../mpv');
 
 let state = 0;
 

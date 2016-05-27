@@ -102,5 +102,5 @@ class mpv {
     }
 }
 
-exports.mpv = mpv;
+exports = mpv;
 
