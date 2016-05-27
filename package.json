@@ -1,8 +1,30 @@
 {
-    "name": "mpv-controller",
-    "description": "Controller for mpv.",
-    "repository": "https://github.com/raksooo/mpv-controller",
-    "scripts": {
-        "build": "browserify mpv.js -o build/mpv.js -t [ babelify --presets [ es2015 ] ]"
-    }
+  "name": "mpv-controller",
+  "version": "1.0.0",
+  "description": "Controller for mpv media player.",
+  "main": "mpv.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "build": "browserify mpv.js -o build/mpv.js -t [ babelify --presets [ es2015 ] ]",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raksooo/mpv-controller.git"
+  },
+  "keywords": [
+    "mpv",
+    "controller",
+    "video",
+    "player",
+    "mplayer",
+    "mplayer2"
+  ],
+  "author": "Oskar Nyberg",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/raksooo/mpv-controller/issues"
+  },
+  "homepage": "https://github.com/raksooo/mpv-controller#readme"
 }
