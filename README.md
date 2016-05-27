@@ -2,6 +2,18 @@
 Node module which controls mpv media player.
 
 ## Usage
+### Example
+```Javascript
+var player = new mpv((status) => {
+    console.log(status);
+});
+player.limitStatusMessages(5);
+
+player.play("/path/to/video.mkv");
+
+setTimeout(player.pause.bind(player), 5000); // Pauses after 5 seconds
+```
+
 ### Creating an instance
 ```Javascript
 var player =  new mpv(statusListener);
@@ -38,7 +50,14 @@ player.bigSeekBackward(); // Seek 30 secons Backwards
 player.displayStatus(); // Displays status hud
 ```
 
+### Limit the amount of statusmessages
+Will show every *mod* update returned by mpv. mod = 5 will show every fifth
+update.
+```Javascript
+player.limitStatusMessages(mod);
+```
+
 ## TODO
-Implement more commands  
-Fix sendKey(key)
+* Implement more commands
+* Fix sendKey(key)
 
