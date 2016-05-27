@@ -65,3 +65,6 @@ player.limitStatusMessages(mod);
 * http://oskarnyberg.com
 * oskar@oskarnyberg.com
 
+## Licence
+MIT: https://opensource.org/licenses/MIT
+
