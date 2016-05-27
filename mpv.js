@@ -102,5 +102,5 @@ class mpv {
     }
 }
 
-exports = mpv;
+module.exports = mpv;
 
