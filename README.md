@@ -1,5 +1,5 @@
 # mpv-controller
-Node module which controls mpv media player.
+Node module which controls mpv media player written in ES6.
 
 ## Usage
 ### Example
@@ -60,4 +60,8 @@ player.limitStatusMessages(mod);
 ## TODO
 * Implement more commands
 * Fix sendKey(key)
+
+## Contact
+* http://oskarnyberg.com
+* oskar@oskarnyberg.com
 
