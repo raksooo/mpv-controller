@@ -8,13 +8,13 @@ var player =  new mpv(statusListener);
 ```
 where statusListener will receive an object containing playback status on the
 form
-```JSON
+```Javascript
 {
     playing: boolean,
     buffering: boolean,
     elapsed: "00:04:42",
     total: "00:07:01",
-    progress:0.6698
+    progress: 0.6698
 }
 ```
 
@@ -39,6 +39,6 @@ player.displayStatus(); // Displays status hud
 ```
 
 ## TODO
-Implement more commands
+Implement more commands  
 Fix sendKey(key)
 
