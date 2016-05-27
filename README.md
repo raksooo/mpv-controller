@@ -68,7 +68,7 @@ player.limitStatusMessages(mod);
 
 ## TODO
 * Implement more commands
-* Fix sendKey(key)
+* Fix sendKey(key) [#1](/../../issues/1)
 
 ## Contact
 * http://oskarnyberg.com
