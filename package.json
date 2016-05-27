@@ -1,0 +1,8 @@
+{
+    "name": "mpv-controller",
+    "description": "Controller for mpv.",
+    "repository": "https://github.com/raksooo/mpv-controller",
+    "scripts": {
+        "build": "browserify mpv.js -o build/mpv.js -t [ babelify --presets [ es2015 ] ]"
+    }
+}
