@@ -1,9 +1,16 @@
 # mpv-controller
 Node module which controls mpv media player written in ES6.
 
+## Installation
+```sh
+npm install mpv-controller
+```
+
 ## Usage
 ### Example
 ```Javascript
+const mpv = require('mpv');
+
 var player = new mpv((status) => {
     console.log(status);
 });
