@@ -99,5 +99,5 @@ class mpv {
     }
 }
 
-module.exports = mpv;
+exports.mpv = mpv;
 
