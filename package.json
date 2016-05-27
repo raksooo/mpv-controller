@@ -1,6 +1,6 @@
 {
   "name": "mpv-controller",
-  "version": "1.0.0-2",
+  "version": "1.0.1",
   "description": "Controller for mpv media player.",
   "main": "mpv.js",
   "dependencies": {},
