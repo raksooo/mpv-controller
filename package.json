@@ -6,7 +6,6 @@
   "dependencies": {},
   "devDependencies": {},
   "scripts": {
-    "build": "browserify mpv.js -o build/mpv.js -t [ babelify --presets [ es2015 ] ]",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
