@@ -26,5 +26,6 @@ let player = new mpv(status => {
 });
 
 player.limitStatusMessages(100);
-player.play('https://www.youtube.com/watch?v=rOOdfugvsIY');
+player.play(["https://www.youtube.com/watch?v=rOOdfugvsIY", "--hwdec=no"
+        , "--ytdl-format=best"]);
 
