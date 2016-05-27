@@ -77,6 +77,8 @@ player.play(["https://www.youtube.com/watch?v=rOOdfugvsIY", "--hwdec=no", "--ytd
 ## TODO
 * Implement more commands
 * Fix sendKey(key) [#1](/../../issues/1)
+* Add functions which creates flags for setting subtitles or create function
+which sets subtitles.
 
 ## Contact
 * http://oskarnyberg.com
