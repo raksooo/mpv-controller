@@ -27,6 +27,9 @@ class mpv {
     }
 
     play(flags) {
+        if (!Array.isArray(flags)) {
+            flags = [flags];
+        }
         this.player = cp.spawn('mpv', flags);
         this.player.stderr.on('data', this.handleData.bind(this));
     }
