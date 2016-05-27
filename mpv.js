@@ -18,12 +18,12 @@ const pausedStrings = [
 class mpv {
     constructor(statusListener) {
         this.statusListener = statusListener;
-        this.statusLimit = 0;
+        this.statusLimit = 1;
         this.statusCounter = 0;
     }
 
     limitStatusMessages(mod) {
-        this.statusLimit = mod;
+        this.statusLimit = mod < 1 ? 1 : mod;
     }
 
     play(flags) {
