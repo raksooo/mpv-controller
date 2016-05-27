@@ -66,6 +66,14 @@ update.
 player.limitStatusMessages(mod);
 ```
 
+### Sending flags to mpv
+```Javascript
+player.play(["/path/to/video.mkv", "--hwdec=no", "--ytdl-format=best"]);
+```
+
+## Dependencies
+* mpv
+
 ## TODO
 * Implement more commands
 * Fix sendKey(key) [#1](/../../issues/1)
