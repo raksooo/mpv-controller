@@ -11,7 +11,7 @@ npm install mpv-controller
 ## Usage
 ### Example
 ```Javascript
-const mpv = require('mpv');
+const mpv = require('mpv-controller');
 
 var player = new mpv((status) => {
     console.log(status);
