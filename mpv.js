@@ -27,12 +27,26 @@ class mpv {
         this.statusLimit = mod < 1 ? 1 : mod;
     }
 
-    play(flags) {
-        if (!Array.isArray(flags)) {
-            flags = [flags];
+    play(first, second, third) {
+        let flags = [];
+        if (Array.isArray(first)) {
+            flags = flags.concat(first);
+        } else {
+            flags.push(first);
+            if (Array.isArray(second)) {
+                flags = flags.concat(second);
+            } else {
+                flags.push('--sub="' + second + '"');
+                if (Array.isArray(third)) {
+                    flags = flags.concat(third);
+                }
+            }
         }
         this.player = cp.spawn('mpv', flags);
+        this.preparePlayer();
+    }
 
+    preparePlayer() {
         this.player.stdin.setEncoding('utf8');
         this.player.stderr.setEncoding('utf8');
         this.player.stderr.on('data', this.handleData.bind(this));
@@ -40,10 +54,12 @@ class mpv {
     }
 
     closed() {
-        this.open = false;
-        this.statusListener({
-            exit: true
-        });
+        if (typeof this.statusListener !== 'undefined' && this.open) {
+            this.open = false;
+            this.statusListener({
+                exit: true
+            });
+        }
     }
 
     handleData(data) {
@@ -92,7 +108,7 @@ class mpv {
         cp.exec('killall -9 mpv');
     }
 
-    // -- The functions below sends commands to mpv ---------------------------
+
     pause() {
         this.sendKey(keys.pause);
     }
