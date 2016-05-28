@@ -20,6 +20,7 @@ class mpv {
         this.statusListener = statusListener;
         this.statusLimit = 1;
         this.statusCounter = 0;
+        this.open = false;
     }
 
     limitStatusMessages(mod) {
@@ -31,10 +32,22 @@ class mpv {
             flags = [flags];
         }
         this.player = cp.spawn('mpv', flags);
+
+        this.player.stdin.setEncoding('utf8');
+        this.player.stderr.setEncoding('utf8');
         this.player.stderr.on('data', this.handleData.bind(this));
+        this.player.stderr.on('close', this.closed.bind(this));
+    }
+
+    closed() {
+        this.open = false;
+        this.statusListener({
+            exit: true
+        });
     }
 
     handleData(data) {
+        this.open = true;
         if (typeof this.statusListener !== 'undefined'
                 && this.statusCounter++ % this.statusLimit === 0) {
             let status = this.parseData(data.toString());
@@ -66,10 +79,17 @@ class mpv {
     // Should be done with this.player.stdin.write(key) which I can't manage to
     // get working.
     sendKey(key) {
-        cp.exec('xdotool search --name mpv | tail -1', (_, result) => {
-            result = result.trim();
-            cp.exec('xdotool key --window ' + result + ' ' + key);
-        });
+        if (this.open) {
+            cp.exec('xdotool search --name " - mpv"', (_, result) => {
+                result = result.trim();
+                cp.exec('xdotool key --window ' + result + ' ' + key);
+            });
+        }
+    }
+
+    // This force kills mpv.
+    kill() {
+        cp.exec('killall -9 mpv');
     }
 
     // -- The functions below sends commands to mpv ---------------------------
