@@ -13,7 +13,7 @@ npm install mpv-controller
 ```Javascript
 const mpv = require('mpv-controller');
 
-var player = new mpv((status) => {
+var player = new mpv(status => {
     console.log(status);
 });
 player.limitStatusMessages(5);
@@ -38,10 +38,17 @@ form
     progress: 0.6698
 }
 ```
+or
+```Javascript
+{
+    exit: true
+}
+```
+if mpv has been closed.
 
 ### Play a video
 ```Javascript
-player.play("/path/to/video.mkv");
+player.play(video [, subtitles [, mpv-flags]]);
 ```
 
 ### Pause/resume
@@ -59,7 +66,7 @@ player.bigSeekBackward(); // Seek 30 secons Backwards
 player.displayStatus(); // Displays status hud
 ```
 
-### Limit the amount of statusmessages
+### Limit the amount of status messages
 Will show every *mod* update returned by mpv. mod = 5 will show every fifth
 update.
 ```Javascript
@@ -77,8 +84,6 @@ player.play(["https://www.youtube.com/watch?v=rOOdfugvsIY", "--hwdec=no", "--ytd
 ## TODO
 * Implement more commands
 * Fix sendKey(key) [#1](/../../issues/1)
-* Add functions which creates flags for setting subtitles or create function
-which sets subtitles.
 
 ## Contact
 * http://oskarnyberg.com
