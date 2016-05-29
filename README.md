@@ -84,6 +84,7 @@ player.play(["https://www.youtube.com/watch?v=rOOdfugvsIY", "--hwdec=no", "--ytd
 ## TODO
 * Implement more commands
 * Fix sendKey(key) [#1](/../../issues/1)
+* Use seconds integer for elapsedTime and totalTime
 
 ## Contact
 * http://oskarnyberg.com
