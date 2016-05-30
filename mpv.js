@@ -16,8 +16,12 @@ const pausedStrings = [
 ];
 
 class mpv {
-    constructor(statusListener) {
-        this.dataHandler = new DataHandler(statusListener);
+    constructor(listener) {
+        this.dataHandler = new DataHandler(listener);
+    }
+
+    set listener(listener) {
+        this.dataHandler.setListener(listener);
     }
 
     limitStatusMessages(mod) {
@@ -106,6 +110,10 @@ class DataHandler {
         this.statusLimit = 1;
         this.statusCounter = 0;
         this.open = false;
+    }
+
+    setListener(listener) {
+        this.listener = listener;
     }
 
     limit(mod) {
