@@ -31,10 +31,12 @@ where statusListener will receive an object containing playback status on the
 form
 ```Javascript
 {
-    playing: boolean,
-    buffering: boolean,
-    elapsed: "00:04:42",
-    total: "00:07:01",
+    playing: true,
+    buffering: false,
+    elapsed: 282,
+    total: 421,
+    elapsedStr: "00:04:42",
+    totalStr: "00:07:01",
     progress: 0.6698
 }
 ```
@@ -53,7 +55,17 @@ player.play(video [, subtitles [, mpv-flags]]);
 
 ### Pause/resume
 ```Javascript
+player.togglePause();
+```
+
+### Pause
+```Javascript
 player.pause();
+```
+
+### Resume
+```Javascript
+player.resume();
 ```
 
 ### Other commands
@@ -84,7 +96,6 @@ player.play(["https://www.youtube.com/watch?v=rOOdfugvsIY", "--hwdec=no", "--ytd
 ## TODO
 * Implement more commands
 * Fix sendKey(key) [#1](/../../issues/1)
-* Use seconds integer for elapsedTime and totalTime
 
 ## Contact
 * http://oskarnyberg.com

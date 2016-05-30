@@ -7,7 +7,16 @@ const keys = {
     seekBackward: 'Left',
     seekForward: 'Right',
     bigSeekBackward: 'Down',
-    bigSeekForward: 'Up'
+    bigSeekForward: 'Up',
+    increaseSpeed: '[',
+    decreaseSpeed: ']',
+    resetSpeed: 'BackSpace',
+    decreaseVolume: '/',
+    increaseVolume: '*',
+    muteSound: 'm',
+    toggleFullscreen: 'f',
+    exitFullscreen: 'Escape',
+    toggleSubtitle: 'v'
 };
 
 const pausedStrings = [
@@ -18,10 +27,26 @@ const pausedStrings = [
 class mpv {
     constructor(listener) {
         this.dataHandler = new DataHandler(listener);
+        this.playing = false;
+
+        this.registerControlFunctions();
     }
 
-    set listener(listener) {
+    registerControlFunctions() {
+        for (let command in keys) {
+            if (command !== 'pause') {
+                let key = keys[command];
+                this[command] = this.sendKey.bind(this, key);
+            }
+        }
+    }
+
+    setListener(listener) {
         this.dataHandler.setListener(listener);
+    }
+
+    removeListener() {
+        this.dataHandler.setListener();
     }
 
     limitStatusMessages(mod) {
@@ -43,11 +68,13 @@ class mpv {
                 }
             }
         }
-        this.player = cp.spawn('mpv', flags);
-        this.preparePlayer();
+        this.startMpv(flags);
     }
 
-    preparePlayer() {
+    startMpv(flags) {
+        this.player = cp.spawn('mpv', flags);
+        this.playing = true;
+
         this.player.stdin.setEncoding('utf8');
         this.player.stderr.setEncoding('utf8');
         this.player.stderr.on('data',
@@ -74,33 +101,23 @@ class mpv {
         cp.exec('killall -9 mpv');
     }
 
+    togglePause() {
+        if (this.player) {
+            this.playing = !this.playing;
+            this.sendKey(keys.pause);
+        }
+    }
 
     pause() {
-        this.sendKey(keys.pause);
+        if (this.player && this.playing) {
+            this.togglePause();
+        }
     }
 
-    stop() {
-        this.sendKey(keys.stop);
-    }
-
-    seekBackward() {
-        this.sendKey(keys.seekBackward);
-    }
-
-    seekForward() {
-        this.sendKey(keys.seekForward);
-    }
-
-    bigSeekBackward() {
-        this.sendKey(keys.bigSeekBackward);
-    }
-
-    bigSeekForward() {
-        this.sendKey(keys.bigSeekForward);
-    }
-
-    displayStatus() {
-        this.sendKey(keys.status);
+    resume() {
+        if (this.player && !this.playing) {
+            this.togglePause();
+        }
     }
 }
 
