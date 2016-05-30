@@ -76,6 +76,15 @@ player.seekBackward(); // Seek 5 seconds backwards
 player.bigSeekForward(); // Seek 30 seconds forwards
 player.bigSeekBackward(); // Seek 30 secons Backwards
 player.displayStatus(); // Displays status hud
+player.increaseSpeed();
+player.decreaseSpeed();
+player.resetSpeed: 'BackS();
+player.decreaseVolume();
+player.increaseVolume();
+player.muteSound();
+player.toggleFullscreen();
+player.exitFullscreen: 'Es();
+player.toggleSubtitl();
 ```
 
 ### Limit the amount of status messages
