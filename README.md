@@ -78,12 +78,12 @@ player.bigSeekBackward(); // Seek 30 secons Backwards
 player.displayStatus(); // Displays status hud
 player.increaseSpeed();
 player.decreaseSpeed();
-player.resetSpeed: 'BackS();
+player.resetSpeed();
 player.decreaseVolume();
 player.increaseVolume();
 player.muteSound();
 player.toggleFullscreen();
-player.exitFullscreen: 'Es();
+player.exitFullscreen();
 player.toggleSubtitl();
 ```
 
