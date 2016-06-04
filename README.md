@@ -96,7 +96,7 @@ player.limitStatusMessages(mod);
 
 ### Sending flags to mpv
 ```Javascript
-player.play(["https://www.youtube.com/watch?v=rOOdfugvsIY", "--hwdec=no", "--ytdl-format=best"]);
+player.play("https://www.youtube.com/watch?v=rOOdfugvsIY", ["--hwdec=no", "--ytdl-format=best"]);
 ```
 
 ## Dependencies
