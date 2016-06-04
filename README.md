@@ -84,7 +84,7 @@ player.increaseVolume();
 player.muteSound();
 player.toggleFullscreen();
 player.exitFullscreen();
-player.toggleSubtitl();
+player.toggleSubtitle();
 ```
 
 ### Limit the amount of status messages
