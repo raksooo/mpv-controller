@@ -81,7 +81,7 @@ player.decreaseSpeed();
 player.resetSpeed();
 player.decreaseVolume();
 player.increaseVolume();
-player.muteSound();
+player.mute();
 player.toggleFullscreen();
 player.exitFullscreen();
 player.toggleSubtitle();

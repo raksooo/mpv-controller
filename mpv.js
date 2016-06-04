@@ -11,9 +11,9 @@ const keys = {
     increaseSpeed: '[',
     decreaseSpeed: ']',
     resetSpeed: 'BackSpace',
-    decreaseVolume: '/',
-    increaseVolume: '*',
-    muteSound: 'm',
+    decreaseVolume: '9',
+    increaseVolume: '0',
+    mute: 'm',
     toggleFullscreen: 'f',
     exitFullscreen: 'Escape',
     toggleSubtitle: 'v'
