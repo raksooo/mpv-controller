@@ -27,14 +27,13 @@ const pausedStrings = [
 class mpv {
     constructor(listener) {
         this.dataHandler = new DataHandler(listener);
-
         this.registerControlFunctions();
     }
 
     registerControlFunctions() {
-        for (let commandName in commands) {
-            let command = commands[commandName];
-            this[commandName] = this.sendCommand.bind(this, command);
+        for (let name in commands) {
+            let action = commands[name];
+            this[name] = this.sendCommand.bind(this, action);
         }
     }
 
@@ -76,11 +75,13 @@ class mpv {
         this.player.stderr.setEncoding('utf8');
         this.player.stderr.on('data',
                 this.dataHandler.handleData.bind(this.dataHandler));
-        this.player.stderr.on('close', () => {
-            this.fifo.close();
-            this.dataHandler.closed();
-            this.player == null;
-        });
+        this.player.stderr.on('close', this.closed.bind(this));
+    }
+
+    closed() {
+        this.fifo.close();
+        this.dataHandler.closed();
+        this.player == null;
     }
 
     sendCommand(command) {
@@ -90,8 +91,8 @@ class mpv {
     }
 
     kill() {
-        cp.exec('killall -9 mpv');
         this.fifo.close();
+        cp.exec('killall -9 mpv');
     }
 }
 
@@ -100,7 +101,6 @@ class DataHandler {
         this.listener = listener;
         this.statusLimit = 1;
         this.statusCounter = 0;
-        this.open = false;
     }
 
     setListener(listener) {
@@ -112,7 +112,6 @@ class DataHandler {
     }
 
     handleData(data) {
-        this.open = true;
         if (typeof this.listener !== 'undefined'
                 && this.statusCounter++ % this.statusLimit === 0) {
             let status = this.parseData(data.toString());
@@ -121,8 +120,7 @@ class DataHandler {
     }
 
     closed() {
-        if (typeof this.listener !== 'undefined' && this.open) {
-            this.open = false;
+        if (typeof this.listener !== 'undefined') {
             this.listener({
                 exit: true
             });
