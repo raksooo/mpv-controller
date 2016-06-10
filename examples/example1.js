@@ -13,14 +13,8 @@ let player = new mpv(status => {
     } else if (status.playing && state === 4) {
         player.togglePause();
     } else if (!status.playing && state === 5) {
-        player.pause();
-    } else if (!status.playing && state === 6) {
-        player.resume();
-    } else if (status.playing && state === 7) {
-        player.resume();
-    } else if (status.playing && state === 8) {
         player.stop();
-    } else if (status.exit && state === 9) {
+    } else if (status.exit && state === 6) {
         console.log('Success');
     } else {
         console.error('Failed');

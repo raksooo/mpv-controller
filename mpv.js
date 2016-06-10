@@ -2,7 +2,7 @@ const cp = require('child_process'),
       FIFO = require('fifo-js');
 
 const commands = {
-    pause: 'cycle pause',
+    togglePause: 'cycle pause',
     stop: 'stop',
     status: 'show-progress',
     seekBackward: 'seek -5',
@@ -27,17 +27,14 @@ const pausedStrings = [
 class mpv {
     constructor(listener) {
         this.dataHandler = new DataHandler(listener);
-        this.playing = false;
 
         this.registerControlFunctions();
     }
 
     registerControlFunctions() {
         for (let commandName in commands) {
-            if (commandName !== 'pause') {
-                let command = commands[commandName];
-                this[commandName] = this.sendCommand.bind(this, command);
-            }
+            let command = commands[commandName];
+            this[commandName] = this.sendCommand.bind(this, command);
         }
     }
 
@@ -74,7 +71,6 @@ class mpv {
 
     startMpv(flags) {
         this.player = cp.spawn('mpv', flags);
-        this.playing = true;
 
         this.player.stdin.setEncoding('utf8');
         this.player.stderr.setEncoding('utf8');
@@ -96,25 +92,6 @@ class mpv {
     kill() {
         cp.exec('killall -9 mpv');
         this.fifo.close();
-    }
-
-    togglePause() {
-        if (this.player) {
-            this.playing = !this.playing;
-            this.sendCommand(commands.pause);
-        }
-    }
-
-    pause() {
-        if (this.player && this.playing) {
-            this.togglePause();
-        }
-    }
-
-    resume() {
-        if (this.player && !this.playing) {
-            this.togglePause();
-        }
     }
 }
 
