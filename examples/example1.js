@@ -30,6 +30,6 @@ let player = new mpv(status => {
     state++;
 });
 
-player.limitStatusMessages(10);
+player.limitStatusMessages(30);
 player.play(["https://www.youtube.com/watch?v=rOOdfugvsIY", "--hwdec=no" , "--ytdl-format=best"]);
 

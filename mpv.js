@@ -1,22 +1,22 @@
-const cp = require('child_process');
+const cp = require('child_process'),
+      FIFO = require('fifo-js');
 
-const keys = {
-    pause: 'p',
-    stop: 'q',
-    status: 'o',
-    seekBackward: 'Left',
-    seekForward: 'Right',
-    bigSeekBackward: 'Down',
-    bigSeekForward: 'Up',
-    increaseSpeed: '[',
-    decreaseSpeed: ']',
-    resetSpeed: 'BackSpace',
-    decreaseVolume: '9',
-    increaseVolume: '0',
-    mute: 'm',
-    toggleFullscreen: 'f',
-    exitFullscreen: 'Escape',
-    toggleSubtitle: 'v'
+const commands = {
+    pause: 'cycle pause',
+    stop: 'stop',
+    status: 'show-progress',
+    seekBackward: 'seek -5',
+    seekForward: 'seek +5',
+    bigSeekBackward: 'seek -30',
+    bigSeekForward: 'seek +30',
+    increaseSpeed: 'multiply speed 1.1',
+    decreaseSpeed: 'multiply speed 0.9',
+    resetSpeed: 'set speed 1',
+    decreaseVolume: 'add volume -5',
+    increaseVolume: 'add volume 5',
+    mute: 'cycle mute',
+    toggleFullscreen: 'cycle fullscreen',
+    toggleSubtitle: 'cycle sub'
 };
 
 const pausedStrings = [
@@ -33,10 +33,10 @@ class mpv {
     }
 
     registerControlFunctions() {
-        for (let command in keys) {
-            if (command !== 'pause') {
-                let key = keys[command];
-                this[command] = this.sendKey.bind(this, key);
+        for (let commandName in commands) {
+            if (commandName !== 'pause') {
+                let command = commands[commandName];
+                this[commandName] = this.sendCommand.bind(this, command);
             }
         }
     }
@@ -54,7 +54,8 @@ class mpv {
     }
 
     play(first, second, third) {
-        let flags = [];
+        this.fifo = new FIFO();
+        let flags = ["--input-file=" + this.fifo.path];
         if (Array.isArray(first)) {
             flags = flags.concat(first);
         } else {
@@ -62,7 +63,7 @@ class mpv {
             if (Array.isArray(second)) {
                 flags = flags.concat(second);
             } else {
-                flags.push('--sub="' + second + '"');
+                flags.push('--sub-file="' + second + '"');
                 if (Array.isArray(third)) {
                     flags = flags.concat(third);
                 }
@@ -80,31 +81,27 @@ class mpv {
         this.player.stderr.on('data',
                 this.dataHandler.handleData.bind(this.dataHandler));
         this.player.stderr.on('close', () => {
+            this.fifo.close();
             this.dataHandler.closed();
             this.player == null;
         });
     }
 
-    // Should be done with this.player.stdin.write(key) which I can't manage to
-    // get working.
-    sendKey(key) {
+    sendCommand(command) {
         if (this.player) {
-            cp.exec('xdotool search --name " - mpv"', (_, result) => {
-                result = result.trim();
-                cp.exec('xdotool key --window ' + result + ' ' + key);
-            });
+            this.fifo.write(command)
         }
     }
 
-    // This force kills mpv.
     kill() {
         cp.exec('killall -9 mpv');
+        this.fifo.close();
     }
 
     togglePause() {
         if (this.player) {
             this.playing = !this.playing;
-            this.sendKey(keys.pause);
+            this.sendCommand(commands.pause);
         }
     }
 
