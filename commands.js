@@ -13,6 +13,17 @@ module.exports = {
     increaseVolume: 'add volume 5',
     mute: 'cycle mute',
     toggleFullscreen: 'cycle fullscreen',
-    toggleSubtitle: 'cycle sub'
+    toggleSubtitle: 'cycle sub',
+
+    loop: "cycle loop",
+    switch_angle: "cycle angle",
+    switch_audio: "cycle audio",
+    vo_ontop: "cycle ontop",
+    vo_border: "cycle border",
+    frame_drop: "cycle framedrop",
+    switch_vsync: "cycle vsync",
+    sub_visibility: "cycle sub-visibility",
+    forced_subs_only: "cycle sub-forced-only",
+    ass_use_margins: "cycle ass-use-margins",
 };
 
