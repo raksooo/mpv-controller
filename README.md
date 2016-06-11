@@ -58,16 +58,6 @@ player.play(video [, subtitles [, mpv-flags]]);
 player.togglePause();
 ```
 
-### Pause
-```Javascript
-player.pause();
-```
-
-### Resume
-```Javascript
-player.resume();
-```
-
 ### Other commands
 ```Javascript
 player.stop();
@@ -96,7 +86,7 @@ player.limitStatusMessages(mod);
 
 ### Sending flags to mpv
 ```Javascript
-player.play("https://www.youtube.com/watch?v=rOOdfugvsIY", ["--hwdec=no", "--ytdl-format=best"]);
+player.play("https://www.youtube.com/watch?v=rOOdfugvsIY", ["--fs", "--ytdl-format=best"]);
 ```
 
 ## Dependencies
