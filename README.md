@@ -92,10 +92,6 @@ player.play("https://www.youtube.com/watch?v=rOOdfugvsIY", ["--fs", "--ytdl-form
 ## Dependencies
 * mpv
 
-## TODO
-* Implement more commands
-* Fix sendKey(key) [#1](/../../issues/1)
-
 ## Contact
 * http://oskarnyberg.com
 * oskar@oskarnyberg.com
