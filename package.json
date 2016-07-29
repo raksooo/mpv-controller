@@ -4,7 +4,7 @@
   "description": "Controller for mpv media player.",
   "main": "mpv.js",
   "dependencies": {
-      "fifo-js": "1.1.0"
+      "fifo-js": "2.1.0"
   },
   "devDependencies": {},
   "scripts": {
