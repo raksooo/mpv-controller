@@ -29,7 +29,7 @@ class mpv {
     }
 
     limitStatusMessages(mod) {
-        this.dataHandler.limit(mod);
+        this.dataHandler.limit = mod;
     }
 
     play(first, second, third) {
@@ -82,7 +82,7 @@ class mpv {
 class DataHandler {
     constructor(listener) {
         this.listener = listener;
-        this.statusLimit = 1;
+        this._limit = 1;
         this.statusCounter = 0;
     }
 
@@ -90,14 +90,14 @@ class DataHandler {
         this.listener = listener;
     }
 
-    limit(mod) {
-        this.statusLimit = mod < 1 ? 1 : mod;
+    set limit(mod) {
+        this._limit = mod < 1 ? 1 : mod;
     }
 
     handleData(data) {
+        let status = this.parseData(data.toString());
         if (typeof this.listener !== 'undefined'
-                && this.statusCounter++ % this.statusLimit === 0) {
-            let status = this.parseData(data.toString());
+                && this.statusCounter++ % this._limit === 0) {
             this.listener(status);
         }
     }
