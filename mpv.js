@@ -84,6 +84,7 @@ class DataHandler {
         this.listener = listener;
         this._limit = 1;
         this.statusCounter = 0;
+        this.lastStatus;
     }
 
     setListener(listener) {
@@ -97,7 +98,9 @@ class DataHandler {
     handleData(data) {
         let status = this.parseData(data.toString());
         if (typeof this.listener !== 'undefined'
-                && this.statusCounter++ % this._limit === 0) {
+                && (this.statusCounter++ % this._limit === 0
+                    || this.lastStatus !== status.playing)) {
+            this.lastStatus = status.playing;
             this.listener(status);
         }
     }
