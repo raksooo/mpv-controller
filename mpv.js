@@ -54,7 +54,6 @@ class mpv {
     startMpv(flags) {
         this.player = cp.spawn('mpv', flags);
 
-        this.player.stdin.setEncoding('utf8');
         this.player.stderr.setEncoding('utf8');
         this.player.stderr.on('data',
                 this.dataHandler.handleData.bind(this.dataHandler));
