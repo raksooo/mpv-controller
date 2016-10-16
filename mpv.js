@@ -14,9 +14,13 @@ class mpv {
     }
 
     registerControlFunctions() {
-        for (let name in commands) {
-            let action = commands[name];
+        for (let name in commands.nullary) {
+            let action = commands.nullary[name];
             this[name] = this.sendCommand.bind(this, action);
+        }
+        for (let name in commands.n_ary) {
+            let f = commands.n_ary[name];
+            this[name] = (...args) => this.sendCommand(f(...args));
         }
     }
 
@@ -143,4 +147,3 @@ class DataHandler {
 }
 
 module.exports = mpv;
-
