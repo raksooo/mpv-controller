@@ -27,6 +27,7 @@ module.exports = {
     forced_subs_only: () => "cycle sub-forced-only",
     ass_use_margins: () => "cycle ass-use-margins",
 
-    // Unary
+    // N-ary
     addSubtitle: file => `sub-add "${file}"`
+    seek: (diff, mode) => `seek ${diff} ${mode}`
 };
