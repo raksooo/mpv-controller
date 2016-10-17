@@ -1,5 +1,5 @@
 # mpv-controller
-Node.js module which controls mpv media player written in ES6.
+Node.js module which controls mpv media player written in ES2015.
 
 npm: https://www.npmjs.com/package/mpv-controller
 
@@ -65,6 +65,7 @@ player.seekForward(); // Seek 5 seconds forwards
 player.seekBackward(); // Seek 5 seconds backwards
 player.bigSeekForward(); // Seek 30 seconds forwards
 player.bigSeekBackward(); // Seek 30 secons Backwards
+player.seek(seconds [, mode]); // See mpv documentation for modes
 player.displayStatus(); // Displays status hud
 player.increaseSpeed();
 player.decreaseSpeed();
@@ -75,6 +76,7 @@ player.mute();
 player.toggleFullscreen();
 player.exitFullscreen();
 player.toggleSubtitle();
+player.addSubtitle(filepath);
 ```
 
 ### Limit the amount of status messages
