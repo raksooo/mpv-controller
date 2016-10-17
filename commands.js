@@ -28,6 +28,6 @@ module.exports = {
     ass_use_margins: () => "cycle ass-use-margins",
 
     // N-ary
-    addSubtitle: file => `sub-add "${file}"`
+    addSubtitle: file => `sub-add "${file}"`,
     seek: (diff, mode) => `seek ${diff} ${mode}`
 };
