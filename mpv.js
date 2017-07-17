@@ -74,7 +74,7 @@ class mpv {
 
     kill() {
         this.fifo.close();
-        cp.exec('killall -9 mpv');
+        this.player.kill();
     }
 }
 
