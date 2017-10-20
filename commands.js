@@ -29,5 +29,6 @@ module.exports = {
 
     // N-ary
     addSubtitle: file => `sub-add "${file}"`,
-    seek: (diff, mode) => `seek ${diff} ${mode}`
+    seek: (diff, mode) => `seek ${diff} ${mode}`,
+    subDelay: diff => `add sub-delay ${diff}`
 };
