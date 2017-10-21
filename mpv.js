@@ -121,7 +121,7 @@ class DataHandler {
             parts.shift();
         }
 
-        let percentage = parts[4].replace(/\(|\)|%/g, '')
+        let percentage = typeof parts[4] === 'undefined' ? 0 : parts[4].replace(/\(|\)|%/g, '')
         let status = {
             playing: playing,
             buffering: buffering,
