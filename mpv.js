@@ -7,6 +7,8 @@ const pausedStrings = [
     "(Buffering)"
 ];
 
+const AV = "AV:";
+
 class mpv {
     constructor(listener) {
         this.dataHandler = new DataHandler(listener);
@@ -96,7 +98,7 @@ class DataHandler {
 
     handleData(data) {
         let status = this.parseData(data.toString());
-        if (typeof this.listener !== 'undefined'
+        if (status !== undefined && typeof this.listener !== 'undefined'
                 && (this.statusCounter++ % this._limit === 0
                     || this.lastStatus !== status.playing)) {
             this.lastStatus = status.playing;
@@ -121,18 +123,20 @@ class DataHandler {
             parts.shift();
         }
 
-        let percentage = typeof parts[4] === 'undefined' ? 0 : parts[4].replace(/\(|\)|%/g, '')
-        let status = {
-            playing: playing,
-            buffering: buffering,
-            elapsed: this.parseTime(parts[1]),
-            total: this.parseTime(parts[3]),
-            elapsedStr: parts[1],
-            totalStr: parts[3],
-            progress: percentage / 100
-        }
+        if (parts[0] === AV) {
+          let percentage = typeof parts[4] === 'undefined' ? 0 : parts[4].replace(/\(|\)|%/g, '')
+          let status = {
+              playing: playing,
+              buffering: buffering,
+              elapsed: this.parseTime(parts[1]),
+              total: this.parseTime(parts[3]),
+              elapsedStr: parts[1],
+              totalStr: parts[3],
+              progress: percentage / 100
+          }
 
-        return status;
+          return status;
+        }
     }
 
     parseTime(time) {
