@@ -65,7 +65,7 @@ class mpv {
     closed() {
         this.fifo.close();
         this.dataHandler.closed();
-        this.player == null;
+        this.player = null;
     }
 
     sendCommand(command) {
